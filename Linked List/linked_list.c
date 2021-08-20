@@ -3,10 +3,10 @@
 
 /* 
 Roll No: 20CS8016
+Q: Implementation of a Linked List.
 */
 
-struct node
-{
+struct node {
   int data;
   struct node * next_node;
 };
@@ -14,7 +14,7 @@ struct node
 struct node * head = NULL;
 
 
-void insert_at_top(int value){
+void insert_at_top(int value) {
   
   struct node *newptr = (struct node*)malloc(sizeof(struct node));
 
@@ -24,7 +24,7 @@ void insert_at_top(int value){
 }
 
 
-void push(int value){
+void push(int value) {
 
   struct node *newptr = (struct node*)malloc(sizeof(struct node));
 
@@ -78,6 +78,8 @@ void display_list() {
       printf("%d ", ptr -> data);
       ptr = ptr -> next_node;
     }
+
+    printf("\n");
   }
 }
 
