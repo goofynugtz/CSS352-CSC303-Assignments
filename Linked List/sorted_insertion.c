@@ -65,7 +65,9 @@ int main () {
   sorted_insertion(5);
   sorted_insertion(7);
   sorted_insertion(6);
+  sorted_insertion(420);
   sorted_insertion(4);
+  sorted_insertion(69);
 
   display_list();
 
