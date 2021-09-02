@@ -1,45 +1,65 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <windef.h>
+#define MAXSIZE 100
+
 /* 
 Roll No: 20CS8016
 Write a program in C to implement insertion, deletion and traversal (search) of an element from an array.
 */
 
-int arr[15];
+int arr[MAXSIZE];
+int size;
 
 
 void insert_at(int index, int value){
 
+  if(index >= MAXSIZE || index < 0){
+    printf("Array overflow!\n");
+    return;
+  }
+
   if(!arr[index]){
     arr[index] = value;
+    size = max(index, size) + 1;
   } else {
 
-    for (int i = sizeof(arr)/sizeof(arr[0]) - 1; i > index; i--){
+    for (int i = MAXSIZE - 1; i > index; i--){
       arr[i] = arr[i - 1];
     }
 
     arr[index] = value;
+    size = max(index, size) + 1;
   }
 }
 
 
 void delete_from(int index){
+
+  if(index < 0 || index >= size){
+    printf("Invalid index. Index not in range.\nEnter in range 0 : %d\n", size-1);
+    return;
+  }
+
   if(!arr[index]){
     printf("Index %d is already empty\n", index);
   } else {
 
-    for (int i = index; i < sizeof(arr)/sizeof(arr[0]); i++){
+    int deleted_value = arr[index];
+
+    for (int i = index; i < size; i++){
       arr[i] = arr[i + 1];
     }
-    arr[sizeof(arr)/sizeof(arr[0]) - 1] = 0;
+    arr[size - 1] = 0;
+    size--;
+    printf("%d at index %d has been deleted\n", deleted_value, index);
   }
-
 }
 
 
-int linear_search(int key){
+int search(int key){
 
-  for (int i = 0; i < sizeof(arr)/sizeof(arr[0]); i++){
+  for (int i = 0; i < size; i++){
     if (arr[i] == key){
       return i;
     }
@@ -47,68 +67,70 @@ int linear_search(int key){
 
   printf("%d is not found in the array.\n", key);
   return -1;
-  
 }
-
-
-
-int binary_search(int key){
-
-  int start = 0;
-  int end = sizeof(arr)/sizeof(arr[0]) - 1;
-  
-  while (start <= end){
-    int mid = start + (end - start)/2;
-
-    if (arr[mid] == key){
-      return mid;
-    }
-    
-    else if (arr[mid] > key){
-      end = mid - 1;
-    }
-
-    else{
-      start = mid + 1; 
-
-    }
-  }
-
-  printf("Not found. Make sure the array is sorted.\n");
-  return -1;
-}
-
 
 
 void display_array(){
-  for (int i = 0; i < sizeof(arr)/sizeof(arr[0]); i++){
+
+  for (int i = 0; i < size; i++){
     printf("%d ", arr[i]);
   }
-  printf("\n");
+  printf("\n---\n");
 }
 
 
 int main () {
 
-  insert_at(0, 4);
-  display_array();
-  insert_at(1, 5);
-  display_array();
-  insert_at(2, 6);
-  display_array();
-  insert_at(3, 7);
-  insert_at(4, 10);
-  display_array();
-  insert_at(2, 15);
-  display_array();
-  insert_at(1, 3);
-  display_array();
-  delete_from(0);
-  display_array();
+  //Original Array
+  printf("Enter no. of elements: "); 
+  scanf("%d", &size);
 
-  printf("Index of 4: %d\n", linear_search(4));
-  printf("Index of 6: %d\n", linear_search(6));
-  // printf("Index of 6 from Binary Search: %d", binary_search(6));
+  printf("Enter the array below:\n");
+  for (int i = 0; i < size; i++){
+    scanf("%d", &arr[i]);
+  }
+
+  //Driver Code
+  bool want_to_exit = 0;
+  while (!want_to_exit){
+    int userchoice;
+    printf("\n1: Insert new element\n2: Delete an index\n3: Search for a value\n0: Quit\n");
+    printf("Choose option: ");
+    scanf("%d", &userchoice);
+
+    int index, value, key;
+
+    switch (userchoice) {
+      case 1:
+        printf("\nEnter #index #value: ");
+        scanf("%d %d", &index, &value);
+
+        if (index < 0){
+          
+        }
+        insert_at(index, value);
+        printf("Array: "); display_array();
+        break;
+      
+      case 2:
+        printf("\nEnter #index to be deleted: ");
+        scanf("%d", &index);
+        delete_from(index);
+        printf("Array: "); display_array();
+        break;
+
+      case 3:
+        printf("\nEnter #value to search: ");
+        scanf("%d", &key);
+        int position = search(key);
+        printf("%d is at position %d\n", key, position);
+        break;
+
+      default:
+        want_to_exit = 1;
+        break;
+    }
+  }
 
   return 0;
 }
