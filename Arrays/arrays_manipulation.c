@@ -37,7 +37,7 @@ void insert_at(int index, int value){
 void delete_from(int index){
 
   if(index < 0 || index >= size){
-    printf("Invalid index. Index not in range.\nEnter in range 0 : %d\n", size-1);
+    printf("Invalid index. Index not in range.\nEnter in range (0 : %d)\n", size-1);
     return;
   }
 
