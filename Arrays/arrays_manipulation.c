@@ -5,7 +5,6 @@
 
 /* 
 Roll No: 20CS8016
-Write a program in C to implement insertion, deletion and traversal (search) of an element from an array.
 */
 
 int arr[MAXSIZE];
@@ -104,10 +103,6 @@ int main () {
       case 1:
         printf("\nEnter #index #value: ");
         scanf("%d %d", &index, &value);
-
-        if (index < 0){
-          
-        }
         insert_at(index, value);
         printf("Array: "); display_array();
         break;
