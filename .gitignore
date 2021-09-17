@@ -3,5 +3,6 @@ temp
 *.exe
 .vscode
 *.docx
-"Assignment 2 - Questions.pdf"
-"Assignment 2 - DriveLinked.docx"
+*.pdf
+Submissions/Assignment\ 2/Assignment\ 2\ -\ Questions.pdf
+*.tmp

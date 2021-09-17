@@ -4,8 +4,9 @@
 
 /*
 Roll No: 20CS8016
-Q: Write a function to insert an element in a linked list in sorted order. 
-The function will be called for every element to be inserted.
+Q: A linked list head is given which is sorted. 
+Insert a given element in the list head so that after insertion, 
+the list head is also sorted
 */
 
 
@@ -29,15 +30,14 @@ void sorted_insertion(int value) {
   } else {
     node * current_pointer = head;
     node * previous_pointer = NULL;
-    
-    if (current_pointer -> data >= newptr -> data) {
 
+    if (current_pointer -> data >= newptr -> data) {
       newptr -> next_node = head;
       head = newptr;
 
     } else {
-      while (current_pointer != NULL){
 
+      while (current_pointer != NULL){
         if (current_pointer -> data >= newptr -> data){
           previous_pointer -> next_node = newptr;
           newptr -> next_node = current_pointer;
@@ -60,10 +60,8 @@ void sorted_insertion(int value) {
 
 
 void display_list() {
-
-  struct node * ptr; 
+  node * ptr; 
   ptr = head;
-
   if (ptr == NULL){
     printf("Empty List\n");
   } else {
@@ -78,13 +76,22 @@ void display_list() {
 
 int main () {
 
+  //This will give a list in sorted manner.
   sorted_insertion(5);
   sorted_insertion(420);
   sorted_insertion(7);
-  sorted_insertion(6);
+  sorted_insertion(45);
   sorted_insertion(4);
   sorted_insertion(69);
+  printf("\nSorted List: ");
+  display_list();
 
+  int n;
+  printf("\nEnter a number to be inserted in list: ");
+  scanf("%d", &n);
+  sorted_insertion(n);
+
+  printf("\nSorted List: ");
   display_list();
 
   return 0;
