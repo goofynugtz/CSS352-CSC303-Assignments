@@ -31,3 +31,5 @@ whether the opening and closing parenthesis match or not and print the correctne
 expression.  
 
 7. Write a program in C to test if a string is palindrome using STACK  
+
+###### by Tanmay De on Saturday, September 18

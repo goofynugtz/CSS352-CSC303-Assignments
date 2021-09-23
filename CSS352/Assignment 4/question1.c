@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #define SIZE 100
 
 /* 
@@ -22,13 +23,13 @@ typedef struct list {
 
 stack s;
 
-void create_stack (stack *s) {
+void create_stack (stack *s){
   s -> top = -1;
   printf("\nStack created successfully.\n");
 }
 
 
-void push (stack *s, int value) {
+void push (stack *s, int value){
   if (s -> top >= SIZE) {
 
     printf ("\nError: Stack overflow\n");
@@ -42,8 +43,8 @@ void push (stack *s, int value) {
 }
 
 
-void pop (stack *s) {
-  if (s -> top < 0) {
+void pop (stack *s){
+  if (s -> top < 0){
     printf ("\nError: Stack is already empty.\n");
     return;
 
@@ -54,12 +55,12 @@ void pop (stack *s) {
 }
 
 
-void peek (stack *s) {
+void peek (stack *s){
   printf("Top of stack is: %d\n", s -> items[s -> top]);
 }
 
 
-void peep (stack *s, int i) {
+void peep (stack *s, int i){
   printf("Stack[%d]: %d\n", i, s -> items[i]);
 }
 
@@ -71,7 +72,7 @@ void update (stack *s, int i, int updatedValue){
 }
 
 
-void display_stack (stack *s) {
+void display_stack (stack *s){
   int size = s -> top;
 
   printf("Stack: ");
@@ -82,7 +83,7 @@ void display_stack (stack *s) {
 }
 
 //Driver
-int main () {
+int main (){
 
   create_stack(&s);
   // printf("1: Creating Stack\n");
@@ -96,7 +97,9 @@ int main () {
   printf("6: Display Stack\n");
   printf("0: Exit Program\n");
 
-  while (1){
+  bool wantToExit = 0;
+
+  while (!wantToExit){
     printf("\nChoose Option: ");
 
     int n;
@@ -104,44 +107,44 @@ int main () {
 
     int i, value;
 
-    switch (n)
-    {
-    case 1:
-      printf("Enter #value to be inserted: ");
-      scanf("%d", &value);
-      push(&s, value);
-      continue;
+    switch (n){
+      
+      case 1:
+        printf("Enter #value to be inserted: ");
+        scanf("%d", &value);
+        push(&s, value);
+        break;
 
-    case 2:
-      pop(&s);
-      continue;
+      case 2:
+        pop(&s);
+        break;
 
-    case 3:
-      peek(&s);
-      continue;
+      case 3:
+        peek(&s);
+        break;
 
-    case 4:
-      printf("#i Index: ");
-      scanf("%d", &i);
-      peep(&s, i);
-      continue;
-    
-    case 5:
-      printf("Enter #index of element to be updated: ");
-      scanf("%d", &i);
-      printf("Enter #value: ");
-      scanf("%d", &value);
-      update(&s, i, value);
-      continue;
+      case 4:
+        printf("#i Index: ");
+        scanf("%d", &i);
+        peep(&s, i);
+        break;
 
-    case 6:
-      display_stack(&s);
+      case 5:
+        printf("Enter #index of element to be updated: ");
+        scanf("%d", &i);
+        printf("Enter #value: ");
+        scanf("%d", &value);
+        update(&s, i, value);
+        break;
 
-    default:
-      break;
+      case 6:
+        display_stack(&s);
+        break;
+
+      default:
+        wantToExit = 1;
+        break;
     }
-
-
   }
 
   return 0;
