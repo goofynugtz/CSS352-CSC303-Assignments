@@ -3,7 +3,10 @@
 
 /*
 Roll No: 20CS8016
-Q: Write a function to concatenate two lists head_1 and head_2 into one big list head.
+
+Q: 4.	Write an interactive C program with the following two functions.
+Concatenate two given lists head1 and head2 into a list head. 
+head1 and/or head2 may be empty.
 */
 
 typedef struct node {
@@ -19,34 +22,36 @@ node * head = NULL;
 
 void concatenate(node * head_ofA, node * head_ofB) {
 
-
-  node * ptr; 
-  ptr = head_ofA;
-
-  if (ptr == NULL){
-    printf("Empty\n");
-  } else {
+  if (head_ofA == NULL){
+    head = head_ofB;
+    return;
+  }
+  else if (head_ofB == NULL){
+    head = head_ofA;
+    return;
+  }
+  else{
+    node * ptr; 
+    ptr = head_ofA;
     while (ptr -> next_node != NULL) {
       ptr = ptr -> next_node;
     }
     ptr -> next_node = head_ofB;
+    head = head_ofA;
   }
-
-  head = head_ofA;
 }
 
 
 
 void push_into_A(int value) {
-
   node *newptr = (node*)malloc(sizeof(node));
   newptr -> data = value;
 
   if (head_1 == NULL){
     newptr -> next_node = NULL;
     head_1 = newptr;
-
   } else {
+
     node * temp;
     temp = head_1;
 
@@ -59,15 +64,14 @@ void push_into_A(int value) {
   }
 }
 void push_into_B(int value) {
-
   node *newptr = (node*)malloc(sizeof(node));
   newptr -> data = value;
 
   if (head_2 == NULL){
     newptr -> next_node = NULL;
     head_2 = newptr;
-
   } else {
+
     node * temp;
     temp = head_2;
 
@@ -86,7 +90,7 @@ void create_list_A() {
   int n;
   printf("Enter the no. of elements in A to enter: ");
   scanf("%d", &n);
-
+  printf("Enter elements of A below\n");
   for (int i = 0; i < n; i++){
     int value;
     scanf("%d", &value);
@@ -97,14 +101,13 @@ void create_list_B() {
   int n;
   printf("Enter the no. of elements in B to enter: ");
   scanf("%d", &n);
-
+  printf("Enter elements of B below\n");
   for (int i = 0; i < n; i++){
     int value;
     scanf("%d", &value);
     push_into_B(value);
   }
 }
-
 
 
 void display_list(node * head) {
@@ -122,17 +125,18 @@ void display_list(node * head) {
 }
 
 
-
-
 int main () {
 
   create_list_A();
   create_list_B();
 
+  printf("\nList A: ");
   display_list(head_1);
+  printf("\nList B: ");
   display_list(head_2);
 
   concatenate(head_1, head_2);
+  printf("\nConcatenated List: ");
   display_list(head);
 
   return 0;
