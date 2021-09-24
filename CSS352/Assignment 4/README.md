@@ -28,7 +28,7 @@ using **linked list**.
 
 6. Write a program in C that takes one mathematical expression (in infix notation) and checks 
 whether the opening and closing parenthesis match or not and print the correctness of the 
-expression.  
+expression.
 
 7. Write a program in C to test if a string is palindrome using STACK  
 
