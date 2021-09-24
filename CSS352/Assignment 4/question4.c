@@ -21,7 +21,6 @@ stack s;
 
 void create_stack (stack *s){
   s -> top = -1;
-  // printf("\nStack created successfully.\n");
 }
 
 bool isEmpty (stack *s){
@@ -38,7 +37,6 @@ bool isOperator (char c){
 
 void push (stack *s, int value){
   if (s -> top >= SIZE) {
-    // printf ("\nError: Stack overflow\n");
     return;
   } 
   else {
@@ -48,10 +46,8 @@ void push (stack *s, int value){
 
 char pop (stack *s){
   if (isEmpty(s)){
-    // printf ("\nError: Stack is already empty.\n");
     return '!';
   } else {
-    // printf("Popped Out: %s\n", s -> items[s -> top]);
     return s -> items[s -> top--];
   }
 }
@@ -103,7 +99,7 @@ int main (){
   create_stack(&s);
   char string[SIZE];
   printf("\nPostfix Expression: ");
-  scanf("%s", string);
+  gets(string);
 
   evalPostfix(string, &s);
 

@@ -68,7 +68,7 @@ int main (){
 
   char word[SIZE];
   printf("\nEnter word: ");
-  scanf("%s", word);
+  gets(word);
 
   isPalindrome(word, &s);
 
