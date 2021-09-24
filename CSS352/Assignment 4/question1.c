@@ -31,14 +31,12 @@ void create_stack (stack *s){
 
 void push (stack *s, int value){
   if (s -> top >= SIZE) {
-
     printf ("\nError: Stack overflow\n");
     return;
-
-  } else {
-
-    s -> top++;
-    s -> items[s -> top] = value;
+  } 
+  else {
+    // s -> top++;
+    s -> items[++(s -> top)] = value;
   }
 }
 
