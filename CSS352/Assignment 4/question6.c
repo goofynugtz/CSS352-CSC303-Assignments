@@ -5,8 +5,9 @@
 /* 
 Roll No: 20CS8016
 
-Q6. Write a program in C that takes one mathematical expression (in infix notation) and checks 
-whether the opening and closing parenthesis match or not and print the correctness of the 
+Q6. Write a program in C that takes one mathematical expression 
+(in infix notation) and checks whether the opening and closing 
+parenthesis match or not and print the correctness of the 
 expression.
 */
 

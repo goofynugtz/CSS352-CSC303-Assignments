@@ -7,8 +7,8 @@
 /* 
 Roll No: 20CS8016
 
-Q3. Write a C program for transforming an infix expression to 
-a postfix expression.
+Q5. Write a program for transforming an infix expression 
+to a prefix expression.
 */
 
 typedef struct stack {
@@ -70,16 +70,16 @@ int priority (char c){
 }
 
 
-void infixToPostfix (char * string, stack *s){
-  push(s, '(');
+void infixToPrefix (char * string, stack *s){
+  //Reverse the string
+  strrev(string);
 
   char infix[SIZE];
-  char postfix[SIZE];
+  char prefix[SIZE];
 
   memset(infix, '\0', SIZE);
 
   strcpy(infix, string);
-  strcat(infix, ")");
   
   int i, j;
   for (i = 0, j = 0; infix[i]; i++){
@@ -88,40 +88,41 @@ void infixToPostfix (char * string, stack *s){
 
     //Operand
     if (isOperand(infix[i])){
-      postfix[j++] = infix[i];
+      prefix[j++] = infix[i];
     }
 
     //Operator 
     else if (isOperator(infix[i])) {
-      while (!isEmpty(s) && priority(infix[i]) <= priority(peek(s)) && isOperator(peek(s))){
-        postfix[j++] = pop(s);
+      while (!isEmpty(s) && priority(infix[i]) < priority(peek(s)) && isOperator(peek(s))){
+        prefix[j++] = pop(s);
       }
       push(s, infix[i]);
     }
     
-    //Opening Parenthesis
-    else if (infix[i] == '('){
+    //Opening Parenthesis (Reversed)
+    else if (infix[i] == ')'){
       push(s, infix[i]);
     }
-    //Closing Parenthesis
-    else if (infix[i] == ')'){
+    //Closing Parenthesis (Reversed)
+    else if (infix[i] == '('){
       while (!isEmpty(s) && isOperator(peek(s))){
-        postfix[j++] = pop(s);
+        prefix[j++] = pop(s);
       }
 
-      if (!isEmpty(s) && peek(s) == '('){
+      if (!isEmpty(s) && peek(s) == ')'){
         pop(s);
       }
     }
-    
   }
 
   while (!isEmpty(s)){
-    postfix[j++] = pop(s);
+    prefix[j++] = pop(s);
   }
-  postfix[j] = '\0';
+  prefix[j] = '\0';
+
+  strrev(prefix);
   
-  printf("\nPostfix Expression: %s\n\n", postfix);
+  printf("\nPrefix Expression: %s\n\n", prefix);
 }
 
 
@@ -131,7 +132,7 @@ int main (){
   printf("\nInfix Expression: ");
   gets(string);
 
-  infixToPostfix(string, &s);
+  infixToPrefix(string, &s);
 
   return 0;
 }

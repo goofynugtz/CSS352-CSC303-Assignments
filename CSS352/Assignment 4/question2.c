@@ -6,8 +6,8 @@
 /* 
 Roll No: 20CS8016
 
-Q2. Write a menu driven program in C to perform following data structure operations on stack 
-using **linked list**. 
+Q2. Write a menu driven program in C to perform following 
+data structure operations on stack using **linked list**. 
 - CREATE 
 - PUSH
 - POP
@@ -59,7 +59,7 @@ void pop (){
     int removedItem = top -> data;
     top = top -> next_node;
     free(ptr);
-    printf("Popped Out: %s\n", removedItem);
+    printf("Popped Out: %d\n", removedItem);
   } 
 }
 
@@ -90,7 +90,7 @@ void peep (int i){
       index++;
 
       if (index == i){
-        printf("Stack[%d]: %d\n", i, ptr -> data);
+        printf("node(%d): %d\n", i, ptr -> data);
         break;
       }
     }
@@ -137,6 +137,20 @@ void display_stack (){
 }
 
 
+void push_row (){
+  int n;
+  printf("No. of values to be inserted in stack: ");
+  scanf("%d", &n);
+
+  printf("Enter values below >>\n");
+  for (int i = 0; i < n; i++){
+    int x;
+    scanf("%d", &x);
+    push(x);
+  }
+}
+
+
 //Driver
 int main (){
 
@@ -144,11 +158,12 @@ int main (){
 
   printf("\n");
   printf("1: Push Value into stack\n");
-  printf("2: Pop from stack\n");
-  printf("3: Peek [Top of stack]\n");
-  printf("4: Peep [ith Element from top of stack]\n");
-  printf("5: Update [ith Element from top of stack]\n");
-  printf("6: Display Stack\n");
+  printf("2: Push multiple values into stack\n");
+  printf("3: Pop from stack\n");
+  printf("4: Peek [Top of stack]\n");
+  printf("5: Peep [ith Element from top of stack]\n");
+  printf("6: Update [ith Element from top of stack]\n");
+  printf("7: Display Stack\n");
   printf("0: Exit Program\n");
 
   bool wantToExit = 0;
@@ -170,20 +185,24 @@ int main (){
         break;
 
       case 2:
-        pop();
+        push_row();
         break;
 
       case 3:
-        peek();
+        pop();
         break;
 
       case 4:
+        peek();
+        break;
+
+      case 5:
         printf("#i Index: ");
         scanf("%d", &i);
         peep(i);
         break;
 
-      case 5:
+      case 6:
         printf("Enter #index of element to be updated: ");
         scanf("%d", &i);
         printf("Enter #value: ");
@@ -191,7 +210,7 @@ int main (){
         update(i, value);
         break;
 
-      case 6:
+      case 7:
         display_stack();
         break;
 

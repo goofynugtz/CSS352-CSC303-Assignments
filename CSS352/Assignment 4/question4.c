@@ -63,12 +63,14 @@ void evalPostfix (char * string, stack * s){
 
   for (int i = 0; postfix[i]; i++){
 
+    if (postfix[i] == ' ') continue;
+
     if (isOperand(postfix[i]))
       push(s, postfix[i] - '0');
 
-    else if (isOperator) {
-      int a = pop(s);
-      int b = pop(s);
+    else if (isOperator(postfix[i])) {
+      float a = pop(s);
+      float b = pop(s);
 
       switch (postfix[i]){
         case '+':

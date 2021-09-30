@@ -5,8 +5,8 @@
 /* 
 Roll No: 20CS8016
 
-Q1. Write a menu driven program in C to perform following data structure operations on stack 
-using **array**:   
+Q1. Write a menu driven program in C to perform following 
+data structure operations on stack using **array**:   
 - CREATE 
 - PUSH
 - POP
@@ -47,7 +47,8 @@ void pop (stack *s){
     return;
 
   } else {
-    printf("Popped Out: %s\n", s -> items[s -> top]);
+
+    printf("Popped Out: %d\n", s -> items[s -> top]);
     s -> top--;
   }
 }
@@ -80,6 +81,21 @@ void display_stack (stack *s){
   printf("\n");
 }
 
+
+void push_row (stack *s){
+  int n;
+  printf("No. of values to be inserted in stack: ");
+  scanf("%d", &n);
+
+  printf("Enter values below >>\n");
+  for (int i = 0; i < n; i++){
+    int x;
+    scanf("%d", &x);
+    push(s, x);
+    // display_stack(s);
+  }
+}
+
 //Driver
 int main (){
 
@@ -88,11 +104,12 @@ int main (){
 
   printf("\n");
   printf("1: Push Value into stack\n");
-  printf("2: Pop from stack\n");
-  printf("3: Peek [Top of stack]\n");
-  printf("4: Peep [ith Element from top of stack]\n");
-  printf("5: Update [ith Element from top of stack]\n");
-  printf("6: Display Stack\n");
+  printf("2: Push multiple values in stack\n");
+  printf("3: Pop from stack\n");
+  printf("4: Peek [Top of stack]\n");
+  printf("5: Peep [ith Element from top of stack]\n");
+  printf("6: Update [ith Element from top of stack]\n");
+  printf("7: Display Stack\n");
   printf("0: Exit Program\n");
 
   bool wantToExit = 0;
@@ -114,20 +131,24 @@ int main (){
         break;
 
       case 2:
-        pop(&s);
+        push_row(&s);
         break;
 
       case 3:
-        peek(&s);
+        pop(&s);
         break;
 
       case 4:
+        peek(&s);
+        break;
+
+      case 5:
         printf("#i Index: ");
         scanf("%d", &i);
         peep(&s, i);
         break;
 
-      case 5:
+      case 6:
         printf("Enter #index of element to be updated: ");
         scanf("%d", &i);
         printf("Enter #value: ");
@@ -135,7 +156,7 @@ int main (){
         update(&s, i, value);
         break;
 
-      case 6:
+      case 7:
         display_stack(&s);
         break;
 
