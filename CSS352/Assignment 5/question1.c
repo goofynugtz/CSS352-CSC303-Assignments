@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#define SIZE 100
+#define SIZE 5
 
 /* 
 Roll No: 20CS8016
@@ -23,8 +23,8 @@ typedef struct queue {
 queue q;
 
 void createQueue (queue *q){
-  q -> front = 0;
-  q -> rear = 0;
+  q -> front = -1;
+  q -> rear = -1;
 }
 
 bool isFull (queue *q){
@@ -32,12 +32,12 @@ bool isFull (queue *q){
 }
 
 bool isEmpty (queue *q){
-  return (q -> rear == q -> front);
+  return (q -> rear == -1);
 }
 
 int queueFront (queue *q){
   if (isEmpty(q)){
-    printf("Error: Queue is Empty\n");
+    printf(">> Queue is Empty\n");
     return -1;
   }
   return q -> array[q -> front];
@@ -45,7 +45,7 @@ int queueFront (queue *q){
 
 int queueRear (queue *q){
   if (isEmpty(q)){
-    printf("Error: Queue is Empty\n");
+    printf(">> Queue is Empty\n");
     return -1;
   }
   return q -> array[q -> rear];
@@ -63,7 +63,12 @@ void enqueue (queue *q, int value){
     printf("Error: Overflow\n");
     return;
   }
-  q -> array[q -> rear++] = value;
+  // printf("rear: %d ", q -> rear);
+  if (q -> front == -1) q -> front = 0;
+  q -> rear++;
+  // printf("-> %d\n", q -> rear);
+  q -> array[q -> rear] = value;
+  // printf("added %d to %d\n", q -> array[q->rear], q -> rear);
 }
 
 void enqueueMultiple (queue *q){
@@ -93,13 +98,15 @@ void dequeue (queue *q){
     printf("Error: Queue is empty.\n");
     return;
   }
-  printf(">> %d has been removed\n", queueFront(q));
-  q -> front++;
+  int value = queueFront(q);
 
   if (q -> front == q -> rear){
-    q -> front = 0;
-    q -> rear = 0;
+    q -> front = -1;
+    q -> rear = -1;
+  } else {
+    q -> front++;
   }
+  printf(">> %d has been removed\n", value);
 }
 
 
@@ -107,10 +114,12 @@ void dequeue (queue *q){
 
 void displayQueue (queue *q){\
 
+  int i;
   printf("Queue: ");
-  for (int i = q -> front; i < q -> rear; i++){
+  for (i = q -> front; i != q -> rear; i++){
     printf("%d ", q -> array[i]);
   }
+  printf("%d ", q -> array[i]);
   printf("\n");
 }
 
@@ -176,8 +185,15 @@ int main (){
         break;
 
       case 7:
-        displayQueue(&q);
-        break;
+        if (isEmpty(&q)){
+          printf(">> Queue is Empty.\n");
+          break;
+
+        } else {
+
+          displayQueue(&q);
+          break;
+        }
 
       default:
         wantToExit = true;

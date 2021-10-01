@@ -14,7 +14,6 @@ Q2. Write a menu driven program in C to perform following data structure operati
 - DISPLAY [Display all the elements stored in a queue]
 */
 
-
 typedef struct queue {
   int front, rear;
   int size;
@@ -109,6 +108,7 @@ void dequeue (queue *q){
     q -> front = (q -> front + 1) % SIZE;
     q -> size--;
   }
+  printf(">> %d has been removed\n", value);
 }
 
 
@@ -187,8 +187,15 @@ int main (){
         break;
 
       case 7:
-        displayQueue(&q);
-        break;
+        if (isEmpty(&q)){
+          printf(">> Queue is Empty.\n");
+          break;
+
+        } else {
+          
+          displayQueue(&q);
+          break;
+        }
 
       default:
         wantToExit = true;
