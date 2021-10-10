@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdbool.h>
-#define SIZE 5
+#define SIZE 10
 
 /* 
 Roll No: 20CS8016
 
-Q1. Write a menu driven program in C to perform following data structure operations on linear queue using array. 
+Q1. Write a menu driven program in C to perform following 
+data structure operations on linear queue using array. 
 - ENQUEUE 
 - DEQUEUE
 - queueFRONT [Extract the information from FRONT of the queue]
@@ -14,9 +15,9 @@ Q1. Write a menu driven program in C to perform following data structure operati
 - DISPLAY [Display all the elements stored in a queue]
 */
 
-
 typedef struct queue {
   int front, rear;
+  int size;
   int array[SIZE];
 } queue;
 
@@ -25,6 +26,7 @@ queue q;
 void createQueue (queue *q){
   q -> front = -1;
   q -> rear = -1;
+  q -> size = 0;
 }
 
 bool isFull (queue *q){
@@ -52,9 +54,8 @@ int queueRear (queue *q){
 }
 
 int queueCount (queue *q){
-  return (q -> rear - q -> front);
+  return (q -> size);
 }
-
 
 
 void enqueue (queue *q, int value){
@@ -63,12 +64,10 @@ void enqueue (queue *q, int value){
     printf("Error: Overflow\n");
     return;
   }
-  // printf("rear: %d ", q -> rear);
   if (q -> front == -1) q -> front = 0;
   q -> rear++;
-  // printf("-> %d\n", q -> rear);
+  q -> size++;
   q -> array[q -> rear] = value;
-  // printf("added %d to %d\n", q -> array[q->rear], q -> rear);
 }
 
 void enqueueMultiple (queue *q){
@@ -80,7 +79,7 @@ void enqueueMultiple (queue *q){
   printf("Enter the number of elements to be enqueued: ");
   int x; scanf("%d", &x);
 
-  if (x > SIZE - (q -> rear)){
+  if (x > SIZE - (q -> size)){
     printf("Not enough space available.\n");
     printf("Free Space: %d\n", SIZE - queueCount(q));
   } else {
@@ -103,13 +102,13 @@ void dequeue (queue *q){
   if (q -> front == q -> rear){
     q -> front = -1;
     q -> rear = -1;
+    q -> size = 0;
   } else {
     q -> front++;
+    q -> size--;
   }
   printf(">> %d has been removed\n", value);
 }
-
-
 
 
 void displayQueue (queue *q){\
@@ -135,7 +134,7 @@ int main (){
   printf("4: Front of Queue\n");
   printf("5: Rear of Queue\n");
   printf("6: No. of elements in queue\n");
-  printf("7: All elements of queue\n");
+  printf("7: Display all elements of queue\n");
   printf("0: Exit Program\n");
 
   bool wantToExit = 0;
@@ -149,17 +148,14 @@ int main (){
 
     switch (n){
       case 1:
-        if (isFull(&q)){
+        if (isFull(&q))
           printf("Error: Queue is full\n");
-          break;
-
-        } else {
-
+        else {
           printf("Enter #value to be pushed: ");
           scanf("%d", &value);
           enqueue(&q, value);
-          break;
         }
+        break;
 
       case 2:
         enqueueMultiple(&q);
@@ -180,20 +176,16 @@ int main (){
         break;
 
       case 6:
-        printf("No. of items: ");
+        printf("No. of items are: ");
         printf("%d\n", queueCount(&q));
         break;
 
       case 7:
-        if (isEmpty(&q)){
+        if (isEmpty(&q))
           printf(">> Queue is Empty.\n");
-          break;
-
-        } else {
-
+        else
           displayQueue(&q);
-          break;
-        }
+        break;
 
       default:
         wantToExit = true;

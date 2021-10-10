@@ -5,7 +5,8 @@
 /* 
 Roll No: 20CS8016
 
-Q2. Write a menu driven program in C to perform following data structure operations on circular queue using array. 
+Q2. Write a menu driven program in C to perform following 
+data structure operations on circular queue using array. 
 - ENQUEUE 
 - DEQUEUE
 - queueFRONT [Extract the information from FRONT of the queue]
@@ -57,7 +58,6 @@ int queueCount (queue *q){
 }
 
 
-
 void enqueue (queue *q, int value){
 
   if (isFull(q)){
@@ -70,6 +70,7 @@ void enqueue (queue *q, int value){
   q -> size++;
   q -> array[q -> rear] = value;
 }
+
 
 void enqueueMultiple (queue *q){
   if (isFull(q)){
@@ -150,18 +151,14 @@ int main (){
 
     switch (n){
       case 1:
-        if (isFull(&q)){
+        if (isFull(&q))
           printf("Error: Queue is full\n");
-          break;
-
-        } else {
-
+        else {
           printf("Enter #value to be pushed: ");
           scanf("%d", &value);
           enqueue(&q, value);
-          break;
         }
-
+        break;
 
       case 2:
         enqueueMultiple(&q);
@@ -182,20 +179,16 @@ int main (){
         break;
 
       case 6:
-        printf("No. of items: ");
+        printf("No. of items are: ");
         printf("%d\n", queueCount(&q));
         break;
 
       case 7:
-        if (isEmpty(&q)){
+        if (isEmpty(&q))
           printf(">> Queue is Empty.\n");
-          break;
-
-        } else {
-          
+        else 
           displayQueue(&q);
-          break;
-        }
+        break;
 
       default:
         wantToExit = true;
