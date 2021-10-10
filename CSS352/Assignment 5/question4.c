@@ -194,7 +194,8 @@ void displayStack (stack *s){
 
 void fillQueueWithStack (queue * q, stack * s){
   printf("Stack ");
-  while (!isStackEmpty(s) || !isQueueFull(q)){
+  while (!isStackEmpty(s)){
+    if (isQueueFull(q)) break;
     enqueue(q, pop(s));
     printf("->> ");
   }
@@ -203,7 +204,8 @@ void fillQueueWithStack (queue * q, stack * s){
 
 void fillStackWithQueue (stack * s, queue * q){
   printf("Queue ");
-  while (!isQueueEmpty(q) || !isStackFull(s)){
+  while (!isQueueEmpty(q)){
+    if (isStackFull(s)) break;
     push(s, dequeue(q));
     printf("->> ");
   }
