@@ -88,12 +88,6 @@ int main (){
     push(&l, value);
   }
 
-  // push(&l, 1);
-  // push(&l, 2);
-  // push(&l, 3);
-  // push(&l, 4);
-  // push(&l, 5);
-
   printf("\n>> Original ");
   display_list(&l);
 

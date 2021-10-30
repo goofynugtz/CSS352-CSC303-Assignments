@@ -5,7 +5,7 @@
 /*
 Roll No: 20CS8016
 
-Q1. Write a C-program for insertion sort using a singly linked linear list. 
+Q1. Write a C-program for insertion sort using a singly linked list. 
 For this puspose, you use a function as described below, 
 which will be called repeatedly from the main function. 
 So, initially the output will be a null list. 
@@ -135,7 +135,6 @@ int main () {
   // sorted_insertion(6);
   // sorted_insertion(4);
   // sorted_insertion(69);
-
 
   return 0;
 }
